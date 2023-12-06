@@ -1,0 +1,51 @@
+﻿@model Football_Club_info__1273288_.ViewModels.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<style>
+    .centered-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    .registration-form {
+        max-width: 400px;
+        width: 100%;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+</style>
+
+<div class="centered-form">
+    <div class="registration-form">
+        <h3>Register</h3>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <div class="form-group mb-1">
+                @Html.TextBoxFor(x => x.Username, new { @class = "form-control", placeholder = "Username..." })
+                @Html.ValidationMessageFor(x => x.Username, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group mb-1">
+                @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Password..." })
+                @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group mb-1">
+                @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password..." })
+                @Html.ValidationMessageFor(x => x.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <div class="d-flex justify-content-between">
+                    <a href="/Accounts/Register">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

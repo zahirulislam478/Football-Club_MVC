@@ -1,0 +1,88 @@
+﻿@model Football_Club_info__1273288_.ViewModels.ClubViewModel
+@{
+    ViewBag.Title = "Create";
+}
+<div class="row">
+    <div class="col-12">
+        <div id="spinner" style="display:none">
+            <div class="d-flex align-items-center">
+                <strong>Loading...</strong>
+                <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+            </div>
+        </div>
+        <div class="alert alert-warning alert-dismissible fade show px-2 mt-2" role="alert" id="successAlert" style="display:none">
+            <strong>Success!</strong> Data saved successfully.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div id="from-div">
+            @using (Ajax.BeginForm("Create", "Clubs", new { },
+                new AjaxOptions
+                {
+                    HttpMethod = "post",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "fields",
+                    LoadingElementId = "spinner",
+                    OnSuccess = "onSuccess",
+                },
+                new { enctype = "multipart/form-data" }))
+            {
+                <h3 class=" mt-3 d-flex justify-content-center"><u>Add New Club</u></h3>
+                <div id="fields">
+                    @Html.Partial("_CreatePartial", Model)
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section styles
+{
+    <link href="~/Content/bootstrap-datepicker.standalone.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+}
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.7.0.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    @*<script src="~/Scripts/jquery.validate.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script>
+        $(() => {
+            $(".fd").datepicker({
+                format: "yyyy-mm-dd"
+            });
+            $(".fd").val('');
+        });
+
+        function onSuccess() {
+            if ($("#server-task").val() == "insert") {
+                $('input[type=text]').val('');
+                $('select').val('');
+                $("#successAlert").show();
+            }
+        }
+        function addDatePicker() {
+            $(".fd").datepicker({
+                format: "yyyy-mm-dd"
+            });
+
+        }
+        function formatDate(dt) {
+            var d = new Date(dt);
+            var date = [
+                d.getFullYear(),
+                ('0' + (d.getMonth() + 1)).slice(-2),
+                ('0' + d.getDate()).slice(-2)
+            ].join('-');
+            return date;
+        }
+    </script>
+    <script>
+        $(() => {
+             $("#back").click(function () {
+                var indexURL = "@Url.Action("index", "Clubs")";
+                window.location.href = indexURL;
+            });
+        });
+    </script>
+}

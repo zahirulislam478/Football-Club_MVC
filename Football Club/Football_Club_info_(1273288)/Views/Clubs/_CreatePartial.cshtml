@@ -1,0 +1,125 @@
+﻿@model Football_Club_info__1273288_.ViewModels.ClubViewModel
+<input type="hidden" id="server-task" value="@ViewBag.Act" />
+<div class="m-3">
+    <div class="form-group row mb-1">
+        @Html.LabelFor(x => x.ClubName, new { @class = "col-form-label col-form-label-sm col-2" })
+        <div class="col-6">
+            @Html.TextBoxFor(x => x.ClubName, new { @class = "form-control form-control-sm" })
+            @Html.ValidationMessageFor(x => x.ClubName, "", new { @class = "text-danger", style = "font-size:x-small" })
+        </div>
+    </div>
+    <div class="form-group row mb-1">
+        @Html.LabelFor(x => x.Country, new { @class = "col-form-label col-form-label-sm col-2" })
+        <div class="col-6">
+            @Html.TextBoxFor(x => x.Country, new { @class = "form-control form-control-sm" })
+            @Html.ValidationMessageFor(x => x.Country, "", new { @class = "text-danger", style = "font-size:x-small" })
+        </div>
+    </div>
+    <div class="form-group row mb-1">
+        @Html.LabelFor(x => x.StadiumName, new { @class = "col-form-label col-form-label-sm col-2" })
+        <div class="col-6">
+            @Html.TextBoxFor(x => x.StadiumName, new { @class = "form-control form-control-sm" })
+            @Html.ValidationMessageFor(x => x.StadiumName, "", new { @class = "text-danger", style = "font-size:x-small" })
+        </div>
+    </div>
+    <div class="form-group row mb-1">
+        @Html.LabelFor(x => x.Capacity, new { @class = "col-form-label col-form-label-sm col-2" })
+        <div class="col-6">
+            @Html.TextBoxFor(x => x.Capacity, new { @class = "form-control form-control-sm" })
+            @Html.ValidationMessageFor(x => x.Capacity, "", new { @class = "text-danger", style = "font-size:x-small" })
+        </div>
+    </div>
+    <div class="form-group row mb-1">
+        @Html.LabelFor(x => x.Manager, new { @class = "col-form-label col-form-label-sm col-2" })
+        <div class="col-6">
+            @Html.TextBoxFor(x => x.Manager, new { @class = "form-control form-control-sm" })
+            @Html.ValidationMessageFor(x => x.Manager, "", new { @class = "text-danger", style = "font-size:x-small" })
+        </div>
+    </div>
+    <div class="form-group row mb-1">
+        @Html.LabelFor(x => x.League, new { @class = "col-form-label col-form-label-sm col-2" })
+        <div class="col-6">
+            @Html.EnumDropDownListFor(x => x.League, "Select One", new { @class = "form-select form-select-sm" })
+            @Html.ValidationMessageFor(x => x.League, "", new { @class = "text-danger", style = "font-size:x-small" })
+        </div>
+    </div>
+    <div class="form-group row mb-1">
+        @Html.LabelFor(x => x.FoundedDate, new { @class = "col-form-label col-form-label-sm col-2" })
+        <div class="col-6">
+            @Html.TextBoxFor(x => x.FoundedDate, new { @class = "form-control form-control-sm fd", type = "date" })
+            @Html.ValidationMessageFor(x => x.FoundedDate, "", new { @class = "text-danger", style = "font-size:x-small" })
+        </div>
+    </div>
+    <div class="form-group row mb-1">
+        @Html.LabelFor(x => x.ClubLogo, new { @class = "col-form-label col-form-label-sm col-2" })
+        <div class="col-6">
+            @Html.TextBoxFor(x => x.ClubLogo, new { @class = "form-control form-control-sm", type = "file" })
+            @Html.ValidationMessageFor(x => x.ClubLogo, "", new { @class = "text-danger", style = "font-size:x-small" })
+        </div>
+    </div>
+    <div class="form-group row mb-1">
+        <div class="form-check offset-2">
+            @Html.CheckBoxFor(x => x.IsChampionLeagueWinner)
+            <label class="form-check-label" for="flexCheckDefault">
+                Champion League Winner?
+            </label>
+        </div>
+    </div>
+</div>
+<div class="col-12">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Player Name</th>
+                <th>Nationality</th>
+                <th>Age</th>
+                <th>JerseyNumber</th>
+                <th>Debut</th>
+                <th>
+                    <button type="submit" class="btn btn-secondary btn-sm add" name="act" value="add" formnovalidate><i class="bi bi-plus"></i></button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Players.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.TextBoxFor(x => Model.Players[i].PlayerName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => Model.Players[i].PlayerName, "", new { @class = "text-danger" })
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => Model.Players[i].Nationality, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => Model.Players[i].Nationality, "", new { @class = "text-danger" })
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => Model.Players[i].Age, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => Model.Players[i].Age, "", new { @class = "text-danger" })
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => Model.Players[i].JerseyNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => Model.Players[i].JerseyNumber, "", new { @class = "text-danger" })
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => Model.Players[i].Debut, new { @class = "form-control", type = "date" })
+                        @Html.ValidationMessageFor(x => Model.Players[i].Debut, "", new { @class = "text-danger" })
+                    </td>
+                    <th>
+                        <button type="submit" class="btn btn-secondary btn-sm" name="act" value="remove_@i" formnovalidate><i class="bi bi-trash"></i></button>
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="form-group row mb-1">
+
+    <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary mx-3" name="act" id="back" value="back">Back to Index</button>
+        <button type="submit" class="btn btn-primary mx-3" name="act" value="insert" id="successAlert">Save to database</button>
+    </div>
+</div>
